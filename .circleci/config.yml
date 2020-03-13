@@ -1,12 +1,17 @@
 version: 2.1
 orbs:
   bazelisk-orb: promiseofcake/bazelisk-orb@dev:first
+parameters:
+  bazel-version:
+    default: "1.2.1"
+    type: string
 jobs:
   build:
     docker:
       - image: cimg/base:2020.01
+    environment:
+      USE_BAZEL_VERSION: << pipeline.parameters.bazel-version >>
     steps:
-      - checkout
-      - run: echo $PATH
       - bazelisk-orb/install
-      - run: lsb_release -a
+      - checkout
+      - run: bazel version
