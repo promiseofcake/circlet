@@ -1,8 +1,11 @@
 version: 2.1
+orbs:
+  bazelisk-orb: promiseofcake/bazelisk-orb@dev:first
 jobs:
   build:
     docker:
       - image: cimg/base:2020.01
     steps:
       - checkout
+      - bazelisk-orb/install
       - run: lsb_release -a
