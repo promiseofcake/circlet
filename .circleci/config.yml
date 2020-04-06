@@ -1,10 +1,19 @@
 version: 2.1
+
 orbs:
   bazelisk-orb: promiseofcake/bazelisk-orb@dev:first
+
 parameters:
   bazel-version:
     default: "1.2.1"
     type: string
+  run_build:
+    type: boolean
+    default: true
+  run_output:
+    type: boolean
+    default: false
+
 jobs:
   build:
     docker:
@@ -15,3 +24,18 @@ jobs:
       - bazelisk-orb/install
       - checkout
       - run: bazel version
+  output:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - run: "this is an output build"
+
+workflows:
+  build:
+    when: << pipeline.parameters.run_build >>
+    jobs:
+      - build
+  output:
+    when: << pipeline.parameters.run_output >>
+    jobs:
+      - output
