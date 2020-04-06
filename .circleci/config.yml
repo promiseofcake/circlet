@@ -28,7 +28,7 @@ jobs:
     docker:
       - image: cimg/base:2020.01
     steps:
-      - run: "this is an output build"
+      - run: echo "this is an output build"
 
 workflows:
   build:
