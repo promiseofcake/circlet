@@ -13,6 +13,9 @@ parameters:
   run_output:
     type: boolean
     default: false
+  run_release:
+    type: boolean
+    default: false
 
 jobs:
   build:
@@ -29,6 +32,11 @@ jobs:
       - image: cimg/base:2020.01
     steps:
       - run: echo "this is an output build"
+  validate:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - run: echo "this is a validation, should we move forward?"
 
 workflows:
   build:
@@ -38,4 +46,13 @@ workflows:
   output:
     when: << pipeline.parameters.run_output >>
     jobs:
+      - output
+  release:
+    when: << pipeline.parameters.run_release >>
+    jobs:
+      - build
+      - validate:
+          type: approval
+          requires:
+            - build
       - output
