@@ -32,7 +32,7 @@ jobs:
       - image: cimg/base:2020.01
     steps:
       - run: echo "this is an output build"
-  validate:
+  pre-validate:
     docker:
       - image: cimg/base:2020.01
     steps:
@@ -51,10 +51,13 @@ workflows:
     when: << pipeline.parameters.run_release >>
     jobs:
       - build
+      - pre-validate:
+          requires:
+            - build
       - validate:
           type: approval
           requires:
-            - build
+            - pre-validate
       - output:
           requires:
             - validate
