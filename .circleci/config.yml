@@ -55,4 +55,6 @@ workflows:
           type: approval
           requires:
             - build
-      - output
+      - output:
+          requires:
+            - validate
