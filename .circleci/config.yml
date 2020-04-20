@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  bazelisk-orb: promiseofcake/bazelisk-orb@dev:first
+  bazelisk-orb: promiseofcake/bazelisk-orb@0.3.0
 
 parameters:
   bazel-version:
