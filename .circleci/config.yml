@@ -27,6 +27,7 @@ jobs:
       - advanced-checkout/shallow-checkout:
           debug: true
           path: $HOME/foo/bar
+      - run: echo $(pwd)
       - run: find .
   build:
     docker:
