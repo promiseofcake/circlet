@@ -22,6 +22,7 @@ jobs:
   test-checkout:
     docker:
       - image: cimg/base:2020.01
+    working_directory: $HOME/foo/bar/baz
     steps:
       - advanced-checkout/shallow-checkout:
           debug: true
