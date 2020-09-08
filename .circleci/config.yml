@@ -23,7 +23,9 @@ jobs:
     docker:
       - image: cimg/base:2020.01
     steps:
-      - advanced-checkout/shallow-checkout
+      - advanced-checkout/shallow-checkout:
+          debug: true
+          path: $HOME/foo/bar
       - run: find .
   build:
     docker:
