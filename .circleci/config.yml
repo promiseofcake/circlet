@@ -63,6 +63,7 @@ workflows:
   test-checkout:
     jobs:
       - test-checkout
+      - test-checkout-android
   build:
     when: << pipeline.parameters.run_build >>
     jobs:
